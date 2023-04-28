@@ -1,13 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import {reducer} from '../src/store/reducer';
+import { ThemeProvider } from '@emotion/react';
+import {theme} from '../src/theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const store = configureStore({
+  reducer: reducer,
+});
+
+console.log("im sotore value:",store);
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 
